@@ -12,6 +12,34 @@ Design a compact, low-cost air-quality monitor that estimates carbon monoxide (C
 
 ## Data
 
+### Notebook setup (Windows and macOS)
+
+Use Python 3.11 or newer and a project virtual environment to avoid conflicts
+with globally installed packages. Run these commands from the project folder.
+
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+macOS:
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+In your notebook editor, select the `.venv` interpreter as the notebook kernel
+(`.venv/Scripts/python.exe` on Windows, `.venv/bin/python` on macOS).
+In PyCharm, also use it as the project's Python interpreter if imports are
+marked unresolved. Restart the notebook kernel and run all cells from the top.
+Both notebooks locate `data/q1.csv` from the project folder or a subfolder.
+Do not copy `.venv` between operating systems; each developer creates their own.
+The comparison notebook runs repeated imputation experiments and may take a
+few minutes. Unfinished sections B-H in `co_lab.ipynb` remain exercise placeholders.
+
 Use `q1.csv`. Each row represents a snapshot of ambient conditions and sensor responses collected in an Italian city in 2004–2005. The regression target is **`CO(GT)`**, the reference CO concentration in mg/m³. The remaining variables are predictors.
 
 | Variable | Description | Typical range | Cost (£) |
