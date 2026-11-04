@@ -35,6 +35,35 @@ Data reference — De Vito, S., Massera, E., Piga, M., Martinotto, L., & Di Fran
 
 Import the data into Python and report the percentage of missing entries (`NaN`) for each feature. Choose, justify, and implement a strategy such as mean or median imputation, k-nearest-neighbour imputation, or model-based imputation.
 
+### Running the missing-data report
+
+Requires Python 3.9 or newer, with no external dependencies. Run `python data_cleaning.py`.
+On macOS, use `python3` instead of `python` if needed.
+
+Place `q1.csv` in the `data` folder, or run `python data_cleaning.py "path/to/q1.csv"`.
+The default path is relative to the script, so launching from another directory
+also works. The code contains no machine-specific paths.
+
+The report prints missing percentages for every column, including `CO(GT)`, to
+two decimal places. Empty fields and the markers `NaN`, `NA`, `N/A`, `null`,
+`none`, `<NA>`, and `#N/A` count as missing, ignoring case and surrounding spaces.
+Numeric sentinels such as `-200` are not counted as missing unless
+the dataset encoding is confirmed. No data is modified; imputation is deferred.
+The report also prints the total row count, the number and percentage of rows
+with any missing value, and the number that would remain after dropping them.
+Each affected row is counted once, even if several columns are missing.
+
+Alternatives to dropping rows include median imputation (a baseline resistant to
+outliers), mean imputation for roughly symmetric features, k-nearest-neighbour
+imputation using similar observations, and iterative model-based imputation using
+relationships between sensors. Missingness indicators can additionally preserve
+information about sensor failures. Median imputation is a reasonable starting
+point to compare with more complex methods for these sensor measurements.
+Fit imputers only on training data, including separately within each
+cross-validation fold, to avoid leakage. Keep rows with missing `CO(GT)` separate:
+imputing the target would invent training labels, and those rows cannot directly
+support supervised training or scoring.
+
 ## B. Explore distributions and correlations
 
 Use a correlation plot or pairs plot to examine the main features and the target. Discuss strong correlations and potential multicollinearity.
