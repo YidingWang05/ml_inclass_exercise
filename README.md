@@ -37,10 +37,10 @@ Import the data into Python and report the percentage of missing entries (`NaN`)
 
 ### Running the missing-data report
 
-Requires Python 3.9 or newer, with no external dependencies. Run `python main.py`.
+Requires Python 3.9 or newer, with no external dependencies. Run `python data_cleaning.py`.
 On macOS, use `python3` instead of `python` if needed.
 
-Place `q1.csv` in the `data` folder, or run `python main.py "path/to/q1.csv"`.
+Place `q1.csv` in the `data` folder, or run `python data_cleaning.py "path/to/q1.csv"`.
 The default path is relative to the script, so launching from another directory
 also works. The code contains no machine-specific paths.
 
@@ -49,6 +49,9 @@ two decimal places. Empty fields and the markers `NaN`, `NA`, `N/A`, `null`,
 `none`, `<NA>`, and `#N/A` count as missing, ignoring case and surrounding spaces.
 Numeric sentinels such as `-200` are not counted as missing unless
 the dataset encoding is confirmed. No data is modified; imputation is deferred.
+The report also prints the total row count, the number and percentage of rows
+with any missing value, and the number that would remain after dropping them.
+Each affected row is counted once, even if several columns are missing.
 
 Alternatives to dropping rows include median imputation (a baseline resistant to
 outliers), mean imputation for roughly symmetric features, k-nearest-neighbour
